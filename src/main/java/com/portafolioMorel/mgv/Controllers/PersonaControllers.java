@@ -36,17 +36,17 @@ public class PersonaControllers {
 		List<Persona> list = iPersonaService.list();
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
+	
 	@PostMapping("/create")
-	public ResponseEntity<Persona> create(@RequestBody DtoPersona dtoPersona) {
+	public ResponseEntity<?> create(@RequestBody DtoPersona dtoPersona) {
 		if (StringUtils.isBlank(dtoPersona.getNombre()))
 			return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 		if (iPersonaService.existsByNombre(dtoPersona.getNombre()))
-			return new ResponseEntity(new Mensaje("Esa experiencia existe"), HttpStatus.BAD_REQUEST);
-		Persona persona = new Persona();
+			return new ResponseEntity(new Mensaje("Esa persona existe"), HttpStatus.BAD_REQUEST);
+		Persona persona = new Persona(0, dtoPersona.getNombre(), dtoPersona.getDescripcion(), dtoPersona.getApellido(),dtoPersona.getImg());
 		iPersonaService.save(persona);
 		return new ResponseEntity(new Mensaje("Persona agregada"), HttpStatus.OK);
 	}
-
 
 	
 
