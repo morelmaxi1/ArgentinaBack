@@ -73,7 +73,10 @@ public class PersonaControllers {
 
 		Persona persona = iPersonaService.getOne(id).get();
 		persona.setNombre(dtoPersona.getNombre());
+		persona.setApellido(dtoPersona.getApellido());
 		persona.setDescripcion(dtoPersona.getDescripcion());
+		persona.setImg(dtoPersona.getImg());
+
 
 		iPersonaService.save(persona);
 
